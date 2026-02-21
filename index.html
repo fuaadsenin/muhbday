@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<title>Happy Birthday 💜</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background: linear-gradient(135deg,#e6e6fa,#d8bfd8);
+    color:#4b0082;
+    text-align:center;
+    
+}
+
+/* ENTRY PAGE */
+#entry{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+#entry h2{
+    margin-bottom:20px;
+    font-size:22px;
+}
+
+input{
+    padding:12px;
+    width:80%;
+    max-width:300px;
+    border-radius:25px;
+    border:2px solid #9370db;
+    outline:none;
+    text-align:center;
+}
+
+button{
+    margin-top:15px;
+    padding:10px 25px;
+    border:none;
+    border-radius:25px;
+    background:#9370db;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#7b68ee;
+}
+
+/* MAIN CONTENT */
+#mainContent{
+    display:none;
+    padding:20px;
+}
+
+/* Birthday Section */
+.birthday{
+    margin-top:30px;
+}
+
+.birthday h1{
+    /* font-size:28px; */
+    margin-bottom:10px;
+    color: rgb(0, 0, 0);
+  font-family: 'Parisienne', cursive;
+
+    font-size: 42px;
+}
+
+.birthday p{
+    font-size:16px;
+    line-height:1.6;
+}
+
+/* Slider */
+.slider{
+    margin:40px 0;
+    position:relative;
+    width:100%;
+    height:75vh;
+    max-height:600px;
+    overflow:hidden;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.slides{
+    width:100%;
+    height:100%;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.slides img{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    object-position:center;   /* THIS IS IMPORTANT */
+    background:#e6e6fa;
+    opacity:0;
+    transition:opacity 1s ease-in-out;
+}
+
+.slides img.active{
+    opacity:1;
+}
+
+.controls{
+    margin-top:10px;
+}
+
+.controls button{
+    margin:5px;
+}
+
+/* Quote */
+.quote{
+    margin:40px 0;
+    padding:20px;
+    background:rgba(255,255,255,0.4);
+    border-radius:20px;
+    font-style:italic;
+    font-size:18px;
+}
+</style>
+</head>
+<body>
+
+<!-- ENTRY PAGE -->
+<div id="entry">
+    <h2>Who is your best friend? 💜</h2>
+    <input type="text" id="answer" placeholder="എഴുത് നോക്കട്ടെ....😏">
+    <button onclick="checkAnswer()">Enter</button>
+    <p id="message" style="margin-top:10px;"></p>
+</div>
+
+<!-- MAIN WEBSITE -->
+<div id="mainContent">
+
+    <div class="birthday">
+        <h1 class="b1">Happy Birthday Mewz 💞💝</h1>
+        <p>
+            To the most beautiful soul in my life,  
+            you make my world brighter every single day.  
+            May your birthday be filled with love, laughter,  
+            and everything your heart desires.
+        </p>
+    </div>
+
+    <!-- PHOTO SLIDER -->
+    <div class="slider">
+    <div class="slides" id="slides"></div>
+</div>
+
+    <!-- QUOTE -->
+    <div class="quote">
+        "Some people make the world beautiful just by being in it.  
+        You are one of them. Happy Birthday 💜"
+    </div>
+
+</div>
+
+<script>
+
+let totalSlides = 104;
+let current = 0;
+let slideInterval = null;
+let slidesContainer = document.getElementById("slides");
+
+// Load images
+for(let i = 0; i <= totalSlides; i++){
+    let img = document.createElement("img");
+    img.src = "photos/photo" + i + ".jpg";
+    if(i === 0){
+        img.classList.add("active");
+    }
+    slidesContainer.appendChild(img);
+}
+
+let images = document.querySelectorAll(".slides img");
+
+function nextSlide(){
+    images[current].classList.remove("active");
+    current = (current + 1) % images.length;
+    images[current].classList.add("active");
+}
+
+function startSlider(){
+    if(!slideInterval){
+        slideInterval = setInterval(nextSlide, 3000);
+    }
+}
+
+function checkAnswer(){
+    let input = document.getElementById("answer").value.toLowerCase();
+
+    if(input === "juma"){
+        document.getElementById("entry").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        startSlider();  // 💜 STARTS HERE
+    }else{
+        document.getElementById("message").innerHTML = "അല്ലേലും അങ്ങനെ ആണല്ലോ ഞമ്മളെ ഒന്നും ആർക്കും പറ്റൂല്ലലോ😠";
+    }
+}
+
+</script>
+
+</body>
+</html>
